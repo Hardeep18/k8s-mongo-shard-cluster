@@ -23,8 +23,7 @@ spec:
   template:
     metadata:
       labels:
-        name: mongocfg1
-        run: mongocfg1
+        app: mongocfg1
     spec:
       restartPolicy: Always
       hostname: mongocfg1
@@ -69,8 +68,7 @@ spec:
   template:
     metadata:
       labels:
-        name: mongocfg2
-        run: mongocfg2
+        app: mongocfg2
     spec:
       restartPolicy: Always
       hostname: mongocfg2
@@ -115,8 +113,7 @@ spec:
   template:
     metadata:
       labels:
-        name: mongocfg3
-        run: mongocfg3
+        app: mongocfg3
     spec:
       restartPolicy: Always
       hostname: mongocfg3

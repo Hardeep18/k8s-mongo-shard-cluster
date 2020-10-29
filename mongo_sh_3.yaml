@@ -24,8 +24,7 @@ spec:
   template:
     metadata:
       labels:
-        name: mongosh3-1
-        run: mongosh3-1
+        app: mongosh3-1
     spec:
       restartPolicy: Always
       hostname: mongosh3-1
@@ -71,8 +70,7 @@ spec:
   template:
     metadata:
       labels:
-        name: mongosh3-2
-        run: mongosh3-2
+        app: mongosh3-2
     spec:
       restartPolicy: Always
       hostname: mongosh3-2
@@ -118,8 +116,7 @@ spec:
   template:
     metadata:
       labels:
-        name: mongosh3-3
-        run: mongosh3-3
+        app: mongosh3-3
     spec:
       restartPolicy: Always
       hostname: mongosh3-3

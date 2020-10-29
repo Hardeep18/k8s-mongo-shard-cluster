@@ -23,8 +23,7 @@ spec:
   template:
     metadata:
       labels:
-        name: mongos1
-        run: mongos1
+        app: mongos1
     spec:
       restartPolicy: Always
       hostname: mongos1
@@ -69,8 +68,7 @@ spec:
   template:
     metadata:
       labels:
-        name: mongos2
-        run: mongos2
+        app: mongos2
     spec:
       restartPolicy: Always
       hostname: mongos1
