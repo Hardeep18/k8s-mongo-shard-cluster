@@ -106,7 +106,7 @@ spec:
   selector:
     run: mongosh3-3
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh3-3
