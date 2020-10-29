@@ -12,12 +12,15 @@ spec:
   selector:
     run: mongosh4-1
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh4-1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: mongosh4-1
   template:
     metadata:
       labels:
@@ -56,12 +59,15 @@ spec:
   selector:
     run: mongosh4-2
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh4-2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: mongosh4-2
   template:
     metadata:
       labels:
@@ -83,8 +89,8 @@ spec:
         args: ["--noprealloc", "--smallfiles", "--replSet", "rs4", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
       volumes:
         - name: mongosh4-2
-          #persistentVolumeClaim:
-          #  claimName: mongosh4-2
+          persistentVolumeClaim:
+           claimName: mongosh4-2
 ---
 # Mongo shard replica set 4 node 3
 apiVersion: v1
@@ -100,12 +106,15 @@ spec:
   selector:
     run: mongosh4-3
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh4-3
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: mongosh4-3
   template:
     metadata:
       labels:
@@ -127,5 +136,5 @@ spec:
         args: ["--noprealloc", "--smallfiles", "--replSet", "rs4", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
       volumes:
         - name: mongosh4-3
-          #persistentVolumeClaim:
-          #  claimName: mongosh4-3
+          persistentVolumeClaim:
+           claimName: mongosh4-3
