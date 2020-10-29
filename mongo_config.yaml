@@ -11,12 +11,15 @@ spec:
   selector:
     run: mongocfg1
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongocfg1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: mongocfg1
   template:
     metadata:
       labels:

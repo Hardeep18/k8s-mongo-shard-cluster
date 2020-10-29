@@ -12,12 +12,15 @@ spec:
   selector:
     run: mongosh1-1
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh1-1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: mongosh1-1
   template:
     metadata:
       labels:
@@ -56,12 +59,15 @@ spec:
   selector:
     run: mongosh1-2
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh1-2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: mongosh1-2
   template:
     metadata:
       labels:
@@ -100,12 +106,15 @@ spec:
   selector:
     run: mongosh1-3
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongosh1-3
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: mongosh1-3
   template:
     metadata:
       labels:
