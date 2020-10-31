@@ -37,7 +37,7 @@ spec:
             - name: mongocfg1
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all", "--port", "27017"]
       volumes:
         - name: mongocfg1
           persistentVolumeClaim:
@@ -82,7 +82,7 @@ spec:
             - name: mongocfg2
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all", "--port", "27017"]
       volumes:
         - name: mongocfg2
           persistentVolumeClaim:
@@ -127,7 +127,7 @@ spec:
             - name: mongocfg3
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all", "--port", "27017"]
       volumes:
         - name: mongocfg3
           persistentVolumeClaim:
