@@ -6,7 +6,7 @@ metadata:
     run: mongocfg1
 spec:
   ports:
-  - port: 27019
+  - port: 27017
     protocol: TCP
   selector:
     run: mongocfg1
@@ -32,12 +32,12 @@ spec:
         name: mongocfg1
         ports:
         - name: mongocfg1
-          containerPort: 27019
+          containerPort: 27017
         volumeMounts:
             - name: mongocfg1
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all"]
       volumes:
         - name: mongocfg1
           persistentVolumeClaim:
@@ -51,7 +51,7 @@ metadata:
     run: mongocfg2
 spec:
   ports:
-  - port: 27019
+  - port: 27017
     protocol: TCP
   selector:
     run: mongocfg2
@@ -77,12 +77,12 @@ spec:
         name: mongocfg2
         ports:
         - name: mongocfg2
-          containerPort: 27019
+          containerPort: 27017
         volumeMounts:
             - name: mongocfg2
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all"]
       volumes:
         - name: mongocfg2
           persistentVolumeClaim:
@@ -96,7 +96,7 @@ metadata:
     run: mongocfg3
 spec:
   ports:
-  - port: 27019
+  - port: 27017
     protocol: TCP
   selector:
     run: mongocfg3
@@ -122,12 +122,12 @@ spec:
         name: mongocfg3
         ports:
         - name: mongocfg3
-          containerPort: 27019
+          containerPort: 27017
         volumeMounts:
             - name: mongocfg3
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all"]
       volumes:
         - name: mongocfg3
           persistentVolumeClaim:
