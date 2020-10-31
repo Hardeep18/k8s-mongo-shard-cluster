@@ -3,13 +3,13 @@ kind: Service
 metadata:
   name: mongos1
   labels:
-    run: mongos1
+    app: mongos1
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongos1
+    app: mongos1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -48,13 +48,13 @@ kind: Service
 metadata:
   name: mongos2
   labels:
-    run: mongos2
+    app: mongos2
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongos2
+    app: mongos2
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -3,13 +3,13 @@ kind: Service
 metadata:
   name: mongocfg1
   labels:
-    run: mongocfg1
+    app: mongocfg1
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongocfg1
+    app: mongocfg1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -48,13 +48,13 @@ kind: Service
 metadata:
   name: mongocfg2
   labels:
-    run: mongocfg2
+    app: mongocfg2
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongocfg2
+    app: mongocfg2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -93,13 +93,13 @@ kind: Service
 metadata:
   name: mongocfg3
   labels:
-    run: mongocfg3
+    app: mongocfg3
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongocfg3
+    app: mongocfg3
 ---
 apiVersion: apps/v1
 kind: Deployment

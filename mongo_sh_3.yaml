@@ -4,13 +4,13 @@ kind: Service
 metadata:
   name: mongosh3-1
   labels:
-    run: mongosh3-1
+    app: mongosh3-1
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongosh3-1
+    app: mongosh3-1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,13 +50,13 @@ kind: Service
 metadata:
   name: mongosh3-2
   labels:
-    run: mongosh3-2
+    app: mongosh3-2
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongosh3-2
+    app: mongosh3-2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -96,13 +96,13 @@ kind: Service
 metadata:
   name: mongosh3-3
   labels:
-    run: mongosh3-3
+    app: mongosh3-3
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongosh3-3
+    app: mongosh3-3
 ---
 apiVersion: apps/v1
 kind: Deployment
