@@ -3,7 +3,7 @@
 ### Config servers
 Start config servers (3 member replica set)
 ```
-docker-compose -f config-server/docker-compose.yaml up -d
+kubectl apply -f mongo_config.yaml -n database
 ```
 Initiate replica set
 ```
@@ -28,7 +28,7 @@ rs.status()
 ### Shard 1 servers
 Start shard 1 servers (3 member replicas set)
 ```
-docker-compose -f shard1/docker-compose.yaml up -d
+kubectl apply -f mongo_sh_1.yaml -n database
 ```
 Initiate replica set
 ```
@@ -37,7 +37,7 @@ mongo mongodb://mongosh1-1:27017
 ```
 rs.initiate(
   {
-    _id: "shard1rs",
+    _id: "rs1",
     members: [
       { _id : 0, host : "mongosh1-1:27017" },
       { _id : 1, host : "mongosh1-2:27017" },
@@ -49,22 +49,75 @@ rs.initiate(
 rs.status()
 ```
 
+### Shard 2 and 3 servers
+Start shard 1 servers (3 member replicas set)
+```
+kubectl apply -f mongo_sh_2.yaml -n database
+```
+Initiate replica set
+```
+mongo mongodb://mongosh2-1:27017
+```
+```
+rs.initiate(
+  {
+    _id: "rs2",
+    members: [
+      { _id : 0, host : "mongosh2-1:27017" },
+      { _id : 1, host : "mongosh2-2:27017" },
+      { _id : 2, host : "mongosh2-3:27017" }
+    ]
+  }
+)
+
+rs.status()
+```
+
+### Shard 3 servers
+Start shard 1 servers (3 member replicas set)
+```
+kubectl apply -f mongo_sh_3.yaml -n database
+```
+Initiate replica set
+```
+mongo mongodb://mongosh3-1:27017
+```
+```
+rs.initiate(
+  {
+    _id: "rs3",
+    members: [
+      { _id : 0, host : "mongosh3-1:27017" },
+      { _id : 1, host : "mongosh3-2:27017" },
+      { _id : 2, host : "mongosh3-3:27017" }
+    ]
+  }
+)
+
+rs.status()
+```
+
+
+
+
+
 ### Mongos Router
 Start mongos query router
 ```
-docker-compose -f mongos/docker-compose.yaml up -d
+kubectl apply -f mongos.yaml -n database
 ```
 
 ### Add shard to the cluster
 Connect to mongos
 ```
-mongo mongodb://mongocfg1:60000
+mongo mongodb://mongocfg1:27017
 ```
 Add shard
 ```
-mongos> sh.addShard("shard1rs/mongocfg1:27017,mongocfg1:27017,mongocfg1:27017")
+mongos> sh.addShard("rs1/mongosh1-1:27017,mongosh1-2:27017,mongosh1-3:27017")
 mongos> sh.status()
 ```
+
 ## Adding another shard
 ### Shard 2 servers
 Start shard 2 servers (3 member replicas set)
@@ -73,16 +126,16 @@ docker-compose -f shard2/docker-compose.yaml up -d
 ```
 Initiate replica set
 ```
-mongo mongodb://mongocfg1:50004
+mongo mongodb://mongocfg1:27017
 ```
 ```
 rs.initiate(
   {
     _id: "shard2rs",
     members: [
-      { _id : 0, host : "mongocfg1:50004" },
-      { _id : 1, host : "mongocfg1:50005" },
-      { _id : 2, host : "mongocfg1:50006" }
+      { _id : 0, host : "mongocfg1:27017" },
+      { _id : 1, host : "mongocfg1:27017" },
+      { _id : 2, host : "mongocfg1:27017" }
     ]
   }
 )
@@ -92,10 +145,15 @@ rs.status()
 ### Add shard to the cluster
 Connect to mongos
 ```
-mongo mongodb://mongocfg1:60000
+mongo mongodb://mongocfg1:27017
 ```
 Add shard
 ```
-mongos> sh.addShard("shard2rs/mongocfg1:50004,mongocfg1:50005,mongocfg1:50006")
+mongos> sh.addShard("rs2/mongosh2-1:27017,mongosh2-2:27017,mongosh2-3:27017")
+mongos> sh.status()
+```
+
+```
+mongos> sh.addShard("rs3/mongosh3-1:27017,mongosh3-2:27017,mongosh3-3:27017")
 mongos> sh.status()
 ```
