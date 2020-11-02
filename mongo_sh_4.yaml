@@ -34,6 +34,13 @@ spec:
         ports:
         - name: mongosh4-1
           containerPort: 27017
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "400m"
+          limits:
+            memory: "1024Mi"
+            cpu: "800m"
         volumeMounts:
             - name: mongosh4-1
               mountPath: /data/db
@@ -87,6 +94,13 @@ spec:
         ports:
         - name: mongosh4-2
           containerPort: 27017
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "400m"
+          limits:
+            memory: "1024Mi"
+            cpu: "800m"
         volumeMounts:
             - name: mongosh4-2
               mountPath: /data/db
@@ -140,6 +154,13 @@ spec:
         ports:
         - name: mongosh4-3
           containerPort: 27017
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "400m"
+          limits:
+            memory: "1024Mi"
+            cpu: "800m"
         volumeMounts:
             - name: mongosh4-3
               mountPath: /data/db

@@ -33,6 +33,13 @@ spec:
         ports:
         - name: mongocfg1
           containerPort: 27017
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
         volumeMounts:
             - name: mongocfg1
               mountPath: /data/db
@@ -85,6 +92,13 @@ spec:
         ports:
         - name: mongocfg2
           containerPort: 27017
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
         volumeMounts:
             - name: mongocfg2
               mountPath: /data/db
@@ -137,6 +151,13 @@ spec:
         ports:
         - name: mongocfg3
           containerPort: 27017
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
         volumeMounts:
             - name: mongocfg3
               mountPath: /data/db
