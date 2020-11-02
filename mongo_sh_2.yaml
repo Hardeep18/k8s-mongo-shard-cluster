@@ -37,12 +37,19 @@ spec:
         volumeMounts:
             - name: mongosh2-1
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--shardsvr", "--replSet", "rs2", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--shardsvr", "--replSet", "rs2", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--port", "27017", "--bind_ip_all"]
       volumes:
         - name: mongosh2-1
           persistentVolumeClaim:
            claimName: mongosh2-1
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256
 ---
 # Mongo shard replica set 2 node 2
 apiVersion: v1
@@ -83,12 +90,20 @@ spec:
         volumeMounts:
             - name: mongosh2-2
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--shardsvr", "--replSet", "rs2", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--shardsvr", "--replSet", "rs2", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--port", "27017", "--bind_ip_all"]
       volumes:
         - name: mongosh2-2
           persistentVolumeClaim:
            claimName: mongosh2-2
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256
+
 ---
 # Mongo shard replica set 2 node 3
 apiVersion: v1
@@ -129,9 +144,16 @@ spec:
         volumeMounts:
             - name: mongosh2-3
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--shardsvr", "--replSet", "rs2", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--shardsvr", "--replSet", "rs2", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--port", "27017", "--bind_ip_all"]
       volumes:
         - name: mongosh2-3
           persistentVolumeClaim:
            claimName: mongosh2-3
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256

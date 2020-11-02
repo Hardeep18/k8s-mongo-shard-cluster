@@ -37,12 +37,19 @@ spec:
         volumeMounts:
             - name: mongosh4-1
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--shardsvr", "--replSet", "rs4", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--shardsvr", "--replSet", "rs4", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--port", "27017", "--bind_ip_all"]
       volumes:
         - name: mongosh4-1
           persistentVolumeClaim:
            claimName: mongosh4-1
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256
 ---
 # Mongo shard replica set 4 node 2
 apiVersion: v1
@@ -83,12 +90,19 @@ spec:
         volumeMounts:
             - name: mongosh4-2
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--shardsvr", "--replSet", "rs4", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--shardsvr", "--replSet", "rs4", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--port", "27017", "--bind_ip_all"]
       volumes:
         - name: mongosh4-2
           persistentVolumeClaim:
            claimName: mongosh4-2
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256
 ---
 # Mongo shard replica set 4 node 3
 apiVersion: v1
@@ -129,9 +143,16 @@ spec:
         volumeMounts:
             - name: mongosh4-3
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "rs4", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--noprealloc", "--smallfiles", "--replSet", "rs4", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--port", "27017", "--bind_ip_all"]
       volumes:
         - name: mongosh4-3
           persistentVolumeClaim:
            claimName: mongosh4-3
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256

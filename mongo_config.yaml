@@ -36,12 +36,19 @@ spec:
         volumeMounts:
             - name: mongocfg1
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all", "--port", "27017"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--bind_ip_all", "--port", "27017"]
       volumes:
         - name: mongocfg1
           persistentVolumeClaim:
            claimName: mongocfg1
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256
 ---
 apiVersion: v1
 kind: Service
@@ -81,12 +88,19 @@ spec:
         volumeMounts:
             - name: mongocfg2
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all", "--port", "27017"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--bind_ip_all", "--port", "27017"]
       volumes:
         - name: mongocfg2
           persistentVolumeClaim:
            claimName: mongocfg2
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256
 ---
 apiVersion: v1
 kind: Service
@@ -126,9 +140,16 @@ spec:
         volumeMounts:
             - name: mongocfg3
               mountPath: /data/db
+            - name: secrets-volume
+              mountPath: /etc/secrets-volume/mongosecret
+              subPath: mongosecret
         command: ["mongod"]
-        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--noauth", "--bind_ip_all", "--port", "27017"]
+        args: ["--configsvr", "--replSet", "cfgrs", "--dbpath","/data/db", "--auth",  "--keyFile", "/etc/secrets-volume/mongosecret", "--bind_ip_all", "--port", "27017"]
       volumes:
         - name: mongocfg3
           persistentVolumeClaim:
            claimName: mongocfg3
+        - name: secrets-volume
+          secret:
+            secretName: mongosecret
+            defaultMode: 256
